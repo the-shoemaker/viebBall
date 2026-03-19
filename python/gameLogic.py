@@ -17,7 +17,7 @@ def gameLogic(scoreP1, scoreP2, maxQuickWin):
             else:
                 scoreP2 += 1
                 print("The current score of player two is " + str(scoreP2))
-            if scoreP1 >= maxQuickWin or scoreP2 >= maxQuickWin:
+            if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
                 print("Quick Win")
                 break
 
