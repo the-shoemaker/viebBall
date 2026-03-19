@@ -7,7 +7,10 @@ def load_config():
         with config_path.open("rb") as f:
             return tomllib.load(f)
     except FileNotFoundError:
-        return {"rules": {"quickWin": True, "maxQuickWin": 7}}
+        return {
+            "rules": {"quickWin": True, "maxQuickWin": 7},
+            "game": {"startScoreP1": 0, "startScoreP2": 0},
+        }
 
 
 def gameLogic(scoreP1, scoreP2, maxQuickWin):
