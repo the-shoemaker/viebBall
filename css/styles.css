@@ -1,0 +1,115 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  -webkit-user-drag: none;
+
+  word-wrap: break-word;
+
+  /*border: 1px solid red;*/
+
+  overscroll-behavior-y: none;
+
+  /* touch-action: manipulation; */
+}
+
+:root {
+  --colorOne: oklch(0.6382 0.0535 197.49);
+  --colorTwo: oklch(from var(--colorOne) .5 c h);
+  --addButtonColorActive: oklch(from var(--colorOne) .2 c h);
+  --removeButtonColor: oklch(from var(--colorOne) .3 c h);
+  --removeButtonColorActive: oklch(from var(--colorOne) .9 c h);
+  --text: white;
+  --smallRadius: .5rem;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+button {
+  all: unset;
+}
+
+.gameScreen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.playerName {
+  pointer-events: none;
+}
+
+.playerWrapper {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: relative;
+  padding: 2rem;
+  gap: 3rem;
+}
+.playerWrapper * {
+  z-index: 1;
+}
+
+.addPoint {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* transition: background-color .1s ease; */
+}
+.addPoint:active {
+  background-color: var(--addButtonColorActive);
+}
+
+.playerOne, .scoreOne {
+  rotate: 180deg;
+}
+.playerOne {
+  background-color: var(--colorOne);
+}
+.playerTwo {
+  background-color: var(--colorTwo);
+}
+
+.removePoint {
+  padding: 1rem 2rem;
+  background-color: var(--removeButtonColor);
+  border-radius: var(--smallRadius);
+  color: var(--text);
+  /* transition: background-color .1s ease; */
+}
+.removePoint:active {
+  background-color: var(--removeButtonColorActive);
+}
+
+.scores {
+  pointer-events: none;
+  height: 1px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 6rem;
+  color: var(--text);
+}
+
+h2 {
+  font-size: 3rem;
+  color: var(--text);
+}
