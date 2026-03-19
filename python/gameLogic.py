@@ -15,16 +15,16 @@ def load_config():
 
 def gameLogic(scoreP1, scoreP2, maxQuickWin):
     while scoreP1 < 10 and scoreP2 < 10:
-            userInput = input("Who scored? 1 or 2? ")
-            if userInput == "1":
-                scoreP1 += 1
-                print("The current score of player one is " + str(scoreP1))
-            else:
-                scoreP2 += 1
-                print("The current score of player two is " + str(scoreP2))
-            if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
-                print("Quick Win")
-                break
+        userInput = input("Who scored? 1 or 2? ")
+        if userInput == "1":
+            scoreP1 += 1
+            print("The current score of player one is " + str(scoreP1))
+        else:
+            scoreP2 += 1
+            print("The current score of player two is " + str(scoreP2))
+        if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
+            print("Quick Win")
+            break
 
 
 def main():
