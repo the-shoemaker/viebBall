@@ -1,0 +1,7 @@
+[rules]
+quickWin = true
+maxQuickWin = 7
+
+[game]
+startScoreP1 = 0
+startScoreP2 = 0
