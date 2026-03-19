@@ -1,8 +1,10 @@
 import tomllib
+from pathlib import Path
 
 def load_config():
+    config_path = Path(__file__).with_name("config.toml")
     try:
-        with open("config.toml", "rb") as f:
+        with config_path.open("rb") as f:
             return tomllib.load(f)
     except FileNotFoundError:
         return {"rules": {"quickWin": True, "maxQuickWin": 7}}
