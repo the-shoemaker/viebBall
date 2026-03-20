@@ -9,12 +9,12 @@ def load_config():
     except FileNotFoundError:
         return {
             "rules": {"quickWin": True, "maxQuickWin": 7},
-            "game": {"startScoreP1": 0, "startScoreP2": 0},
+            "game": {"startScoreP1": 0, "startScoreP2": 0, "maxLongWin": 10},
         }
 
 
-def gameLogic(scoreP1, scoreP2, maxQuickWin):
-    while scoreP1 < 10 and scoreP2 < 10:
+def gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin):
+    while scoreP1 < maxLongWin and scoreP2 < maxLongWin:
         userInput = input("Who scored? 1 or 2? ")
         if userInput == "1":
             scoreP1 += 1
@@ -32,14 +32,15 @@ def main():
 
     scoreP1 = config["game"]["startScoreP1"]
     scoreP2 = config["game"]["startScoreP2"]
+    maxLongWin = config["game"]["maxLongWin"]
 
     quickWinEnabled = config["rules"].get("quickWin", True)
     maxQuickWin = config["rules"].get("maxQuickWin", 7)
 
     if quickWinEnabled:
-        gameLogic(scoreP1, scoreP2, maxQuickWin)
+        gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin)
     else:
-        gameLogic(scoreP1, scoreP2, 10)
+        gameLogic(scoreP1, scoreP2, maxLongWin, maxLongWin)
 
 
 if __name__ == "__main__":
