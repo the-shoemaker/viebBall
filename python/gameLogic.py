@@ -21,8 +21,6 @@ def fillTable(namep1, namep2, p1score, p2score):
     conn.close()
 
 
-player1 = "Dan"
-player2 = "Lan"
 
 def gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin):
     while scoreP1 < maxLongWin and scoreP2 < maxLongWin:
@@ -45,6 +43,8 @@ def main():
     scoreP1 = config["game"]["startScoreP1"]
     scoreP2 = config["game"]["startScoreP2"]
     maxLongWin = config["game"]["maxLongWin"]
+    player1 = config["game"]["nameP1"]
+    player2 = config["game"]["nameP2"]
 
     quickWinEnabled = config["rules"].get("quickWin", True)
     maxQuickWin = config["rules"].get("maxQuickWin", 7)
