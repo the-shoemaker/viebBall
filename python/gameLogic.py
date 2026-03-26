@@ -10,7 +10,7 @@ def load_config():
     except FileNotFoundError:
         return {
             "rules": {"quickWin": True, "maxQuickWin": 7},
-            "game": {"startScoreP1": 0, "startScoreP2": 0, "maxLongWin": 10},
+            "game": {"maxLongWin": 10}
         }
 
 
@@ -23,20 +23,20 @@ def fillTable(namep1, namep2, p1score, p2score):
 
 
 def gameLogic(p1, scoreP1, scoreP2, maxLongWin, maxQuickWin):
-        gameOver = False
-        if p1 == 1:
-            scoreP1 += 1
-            print("The current score of player one is " + str(scoreP1))
-        else:
-            scoreP2 += 1
-            print("The current score of player two is " + str(scoreP2))
+    gameOver = False
+    if p1 == 1:
+        scoreP1 += 1
+        print("The current score of player one is " + str(scoreP1))
+    else:
+        scoreP2 += 1
+        print("The current score of player two is " + str(scoreP2))
 
-        if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
-            gameOver = True
-            print("Quick Win")
-        elif scoreP1 >= maxLongWin or scoreP2 >= maxLongWin:
-            gameOver = True
-            print("Long Win")
+    if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
+        gameOver = True
+        print("Quick Win")
+    elif scoreP1 >= maxLongWin or scoreP2 >= maxLongWin:
+        gameOver = True
+        print("Long Win")
 
-        return scoreP1, scoreP2, gameOver
+    return scoreP1, scoreP2, gameOver
 
