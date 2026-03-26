@@ -1,5 +1,6 @@
 import tomllib
 from pathlib import Path
+import sqlite3
 
 def load_config():
     config_path = Path(__file__).with_name("config.toml")
@@ -11,6 +12,14 @@ def load_config():
             "rules": {"quickWin": True, "maxQuickWin": 7},
             "game": {"startScoreP1": 0, "startScoreP2": 0, "maxLongWin": 10},
         }
+
+def fillTable(namep1, namep2, p1score, p2score):
+    conn = sqlite3.connect('viebBalldb.sqlite')
+    cur = conn.cursor()
+    cur.execute('INSERT INTO scores (player1, player2, scorep1, scorep2) values (?, ?, ?, ?)', (namep1, namep2, p1score, p2score))
+    conn.commit()
+    conn.close()
+
 
 
 def gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin):
@@ -25,6 +34,7 @@ def gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin):
         if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
             print("Quick Win")
             break
+    return scoreP1, scoreP2
 
 
 def main():
@@ -33,15 +43,18 @@ def main():
     scoreP1 = config["game"]["startScoreP1"]
     scoreP2 = config["game"]["startScoreP2"]
     maxLongWin = config["game"]["maxLongWin"]
+    player1 = config["game"]["nameP1"]
+    player2 = config["game"]["nameP2"]
 
     quickWinEnabled = config["rules"].get("quickWin", True)
     maxQuickWin = config["rules"].get("maxQuickWin", 7)
 
     if quickWinEnabled:
-        gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin)
+        scoreP1, scoreP2 = gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin)
     else:
-        gameLogic(scoreP1, scoreP2, maxLongWin, maxLongWin)
+        scoreP1, scoreP2 = gameLogic(scoreP1, scoreP2, maxLongWin, maxLongWin)
 
+    fillTable(player1, player2, scoreP1, scoreP2)
 
 if __name__ == "__main__":
     main()
