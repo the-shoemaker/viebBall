@@ -13,6 +13,7 @@ def load_config():
             "game": {"startScoreP1": 0, "startScoreP2": 0, "maxLongWin": 10},
         }
 
+
 def fillTable(namep1, namep2, p1score, p2score):
     conn = sqlite3.connect('viebBalldb.sqlite')
     cur = conn.cursor()
@@ -21,40 +22,21 @@ def fillTable(namep1, namep2, p1score, p2score):
     conn.close()
 
 
-
-def gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin):
-    while scoreP1 < maxLongWin and scoreP2 < maxLongWin:
-        userInput = input("Who scored? 1 or 2? ")
-        if userInput == "1":
+def gameLogic(p1, scoreP1, scoreP2, maxLongWin, maxQuickWin):
+        gameOver = False
+        if p1 == 1:
             scoreP1 += 1
             print("The current score of player one is " + str(scoreP1))
         else:
             scoreP2 += 1
             print("The current score of player two is " + str(scoreP2))
+
         if (scoreP1 >= maxQuickWin and scoreP2 == 0) or (scoreP2 >= maxQuickWin and scoreP1 == 0):
+            gameOver = True
             print("Quick Win")
-            break
-    return scoreP1, scoreP2
+        elif scoreP1 >= maxLongWin or scoreP2 >= maxLongWin:
+            gameOver = True
+            print("Long Win")
 
+        return scoreP1, scoreP2, gameOver
 
-def main():
-    config = load_config()
-
-    scoreP1 = config["game"]["startScoreP1"]
-    scoreP2 = config["game"]["startScoreP2"]
-    maxLongWin = config["game"]["maxLongWin"]
-    player1 = config["game"]["nameP1"]
-    player2 = config["game"]["nameP2"]
-
-    quickWinEnabled = config["rules"].get("quickWin", True)
-    maxQuickWin = config["rules"].get("maxQuickWin", 7)
-
-    if quickWinEnabled:
-        scoreP1, scoreP2 = gameLogic(scoreP1, scoreP2, maxLongWin, maxQuickWin)
-    else:
-        scoreP1, scoreP2 = gameLogic(scoreP1, scoreP2, maxLongWin, maxLongWin)
-
-    fillTable(player1, player2, scoreP1, scoreP2)
-
-if __name__ == "__main__":
-    main()
