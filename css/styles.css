@@ -22,13 +22,21 @@
 }
 
 :root {
-  --colorOne: oklch(0.6382 0.0535 197.49);
-  --colorTwo: oklch(from var(--colorOne) .5 c h);
-  --addButtonColorActive: oklch(from var(--colorOne) .2 c h);
-  --removeButtonColor: oklch(from var(--colorOne) .3 c h);
-  --removeButtonColorActive: oklch(from var(--colorOne) .9 c h);
+  --colorMain: oklch(0.6382 0.0535 197.49);
+  --colorTitle: oklch(from var(--colorMain) 0.35 c h);
+  --colorArea: oklch(from var(--colorMain) 0.7 c h);
+  --colorAreaActive: oklch(from var(--colorMain) 0.6 c h);
+  --colorAreaAccent: oklch(from var(--colorMain) 0.5 .07 220);
+  --colorAreaAccentIcon: oklch(from var(--colorAreaAccent) .9 c h);
+  --colorOne: oklch(from var(--colorMain) l c h);
+  --colorTwo: oklch(from var(--colorOne) 0.5 c h);
+  --addButtonColorActive: oklch(from var(--colorOne) 0.2 c h);
+  --removeButtonColor: oklch(from var(--colorOne) 0.3 c h);
+  --removeButtonColorActive: oklch(from var(--colorOne) 0.9 c h);
   --text: white;
-  --smallRadius: .5rem;
+  --smallRadius: 0.5rem;
+  --midRadius: 1rem;
+  --infRadius: 99vw;
 }
 
 body,
@@ -38,6 +46,87 @@ html {
 
 button {
   all: unset;
+}
+
+.mainSection {
+  height: 100%;
+  background-color: var(--colorMain);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainTitle {
+  color: var(--colorTitle);
+  text-align: center;
+  font-size: 3rem;
+}
+
+.dockContainer {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 2rem;
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+.dock {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  background-color: var(--colorArea);
+  width: auto;
+  padding: .5rem .5rem;
+  border-radius: var(--infRadius);
+}
+
+.dockIcon {
+  display: block;
+  position: relative;
+  height: 3rem;
+  width: 5rem;
+  padding: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dockIcon span {
+  height: 100%;
+  aspect-ratio: 1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: invert(13%) sepia(7%) saturate(4374%) hue-rotate(178deg)
+  brightness(100%) contrast(88%);
+}
+.dockIcon.active {
+  background-color: var(--colorAreaActive);
+  border-radius: var(--infRadius);
+}
+.dockIcon.home span {
+  background-image: url(/img/icons/home.svg);
+}
+.dockIcon.settings span {
+  background-image: url(/img/icons/settings.svg);
+}
+.dockIcon.add span {
+  height: calc(100% - .4rem);
+  filter: invert(82%) sepia(29%) saturate(286%) hue-rotate(157deg) brightness(102%) contrast(98%);
+  background-image: url(/img/icons/add.svg);
+}
+.dockIcon.add {
+  padding: .5rem .5rem;
+  width: 3.6rem;
+}
+.dock.add {
+  height: 3.6rem;
+  padding: .3rem 0;
+  background-color: var(--colorAreaAccent);
+  border-radius: var(--midRadius);
 }
 
 .gameScreen {
@@ -75,7 +164,8 @@ button {
   background-color: var(--addButtonColorActive);
 }
 
-.playerOne, .scoreOne {
+.playerOne,
+.scoreOne {
   rotate: 180deg;
 }
 .playerOne {
