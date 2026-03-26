@@ -1,0 +1,34 @@
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+      <title>Document</title>
+    </head>
+    <body>
+      <script>document.addEventListener('touchstart', function(){}, {passive: true});</script> <!-- makes :active instant on mobile -->
+      <section class="gameScreen">
+        <div class="playerWrapper playerOne">
+          <form method="post">
+              <button type="submit" name="player" value="1" class="addPoint">Point for Player 1</button>
+          </form>
+          <h2 class="playerName">Dan</h2>
+          <button class="addPoint"></button>
+          <button class="removePoint">Remove</button>
+        </div>
+        <div class="scores">
+          <span class="scoreOne">{{ buttonPressedP1 }}</span>
+          <span class="scoreTwo">{{ buttonPressedP2 }}</span>
+        </div>
+        <div class="playerWrapper playerTwo">
+          <form method="post">
+              <button type="submit" name="player" value="2" class="addPoint">Point for Player 2</button>
+          </form>
+          <h2 class="playerName">Dian</h2>
+          <button class="addPoint"></button>
+          <button class="removePoint">Remove</button>
+        </div>
+      </section>
+    </body>
+  </html>
