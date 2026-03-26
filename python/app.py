@@ -5,13 +5,9 @@ app = Flask(__name__)
 
 currentP1 = 0
 currentP2 = 0
-
-@app.route('/', methods=['GET'])
-def index():
-    return button()
-@app.route('/button', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def button():
-    global currentP1, currentP2
+    global currentP1, currentP2, player1, player2
 
     if request.method == "POST":
         clickedPlayer = int(request.form.get("player", 1))
@@ -32,9 +28,11 @@ def button():
         if gameOver:
             fillTable(player1, player2, currentP1, currentP2)
             return f"<h1>Game Over!</h1><h2>Final Score: {player1} ({currentP1}) - {player2} ({currentP2})</h2>"
+            currentP1 = 0
+            currentP2 = 0
 
-    return render_template("index.html", buttonPressedP1=currentP1, buttonPressedP2=currentP2)
+    return render_template("index.html", buttonPressedP1=currentP1, buttonPressedP2=currentP2, playerName1=player1, playerName2=player2)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)  # debug=True helps you see errors in the browser
+    app.run(debug=False)
