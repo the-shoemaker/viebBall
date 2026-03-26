@@ -7,7 +7,7 @@ currentP1 = 0
 currentP2 = 0
 @app.route('/', methods=['GET', 'POST'])
 def button():
-    global currentP1, currentP2, player1, player2
+    global currentP1, currentP2
 
     if request.method == "POST":
         clickedPlayer = int(request.form.get("player", 1))
@@ -27,9 +27,11 @@ def button():
 
         if gameOver:
             fillTable(player1, player2, currentP1, currentP2)
-            return f"<h1>Game Over!</h1><h2>Final Score: {player1} ({currentP1}) - {player2} ({currentP2})</h2>"
+            finalP1 = currentP1
+            finalP2 = currentP2
             currentP1 = 0
             currentP2 = 0
+            return f"<h1>Game Over!</h1><h2>Final Score: {player1} ({finalP1}) - {player2} ({finalP2})</h2><br><a href='/'>Play Again</a>"
 
     return render_template("index.html", buttonPressedP1=currentP1, buttonPressedP2=currentP2, playerName1=player1, playerName2=player2)
 
