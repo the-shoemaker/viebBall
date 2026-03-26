@@ -9,16 +9,16 @@ currentP2 = 0
 def button():
     global currentP1, currentP2
 
+    config = load_config()
+    maxLongWin = config["game"]["maxLongWin"]
+    player1 = config["game"]["nameP1"]
+    player2 = config["game"]["nameP2"]
+
+    quickWinEnabled = config["rules"].get("quickWin", True)
+    maxQuickWin = config["rules"].get("maxQuickWin", 7)
+
     if request.method == "POST":
         clickedPlayer = int(request.form.get("player", 1))
-
-        config = load_config()
-        maxLongWin = config["game"]["maxLongWin"]
-        player1 = config["game"]["nameP1"]
-        player2 = config["game"]["nameP2"]
-
-        quickWinEnabled = config["rules"].get("quickWin", True)
-        maxQuickWin = config["rules"].get("maxQuickWin", 7)
 
         if quickWinEnabled:
             currentP1, currentP2, gameOver = gameLogic(clickedPlayer, currentP1, currentP2, maxLongWin, maxQuickWin)
