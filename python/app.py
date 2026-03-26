@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from gameLogic import load_config, gameLogic, fillTable
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../html/templates', static_folder='../css/static')
 
 currentP1 = 0
 currentP2 = 0
