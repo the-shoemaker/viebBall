@@ -6,6 +6,9 @@ app = Flask(__name__)
 currentP1 = 0
 currentP2 = 0
 
+@app.route('/', methods=['GET'])
+def index():
+    return button()
 @app.route('/button', methods=['GET', 'POST'])
 def button():
     global currentP1, currentP2
