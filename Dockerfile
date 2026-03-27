@@ -9,4 +9,7 @@ COPY . .
 
 EXPOSE 5000
 
+RUN useradd app
+USER app
+
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--chdir", "/app/python", "app:app"]
