@@ -1,0 +1,15 @@
+FROM python:3.14-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 5000
+
+RUN useradd app
+USER app
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--chdir", "/app/python", "app:app"]
